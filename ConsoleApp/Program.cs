@@ -1,7 +1,10 @@
-﻿using DataAccess.Abstract;
+﻿using Business.Abstract;
+using Business.Concrete;
+using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;
+using System.Collections.Generic;
 
 namespace ConsoleApp
 {
@@ -15,7 +18,13 @@ namespace ConsoleApp
             Console.WriteLine(phone.Brand);
             Console.WriteLine(phone.Model);
 
-            Console.WriteLine("Hello World!");
+            IPhoneService phoneService = new PhoneManager(efPhoneDal);
+            List<Phone> phoneList = phoneService.GetAll().Data;
+
+            foreach (var item in phoneList)
+            {
+                Console.WriteLine(item.PhoneId);
+            }
         }
     }
 }
